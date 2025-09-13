@@ -205,7 +205,7 @@
     </div>
     <!--modal -->
 
-    <div class="modal fade " id="addProduct" style="display:none" aria-hidden="true">
+    <div class="modal fade " id="addProduct" style="display:none" >
 
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">

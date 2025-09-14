@@ -10,7 +10,7 @@ class Index extends Component
     public $data = [];
     public function render()
     {
-        $this->data = Production::orderBy('created_at', 'desc')->get();
+        $this->data = Production::with('product')->orderBy('created_at', 'desc')->get();
         return view('livewire.production.index');
     }
 }

@@ -219,7 +219,7 @@
                                     <label class="form-label" for="name">Maxsulot nomi</label>
                                     <div class="form-control-wrap">
                                         <input type="text" class="form-control" id="name"
-                                            wire:model="newProductName" required="">
+                                            wire:model="newProductName" required="" autofocus>
                                     </div>
                                 </div>
                             </div>
@@ -280,7 +280,7 @@
                                     <label class="form-label" for="edit-name">Maxsulot nomi</label>
                                     <div class="form-control-wrap">
                                         <input wire:model="currentProductName" type="text" class="form-control"
-                                            id="edit-name" value="{{ $currentProductName }}">
+                                            id="edit-name" value="{{ $currentProductName }}" autofocus>
                                     </div>
                                 </div>
                             </div>

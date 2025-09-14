@@ -25,7 +25,7 @@
                                     <tbody>
                                         @foreach ($data as $prd)
                                             @php
-                                                $table_color = '';
+                                                $table_color = 'table-success';
                                                 if ($prd->expires_at < now()) {
                                                     $table_color = 'table-danger';
                                                 }

@@ -49,8 +49,8 @@
 <body onload="window.print(); setTimeout(() => window.close(), 1000)">
     <div class="label">
         <div class="title">{{ $production->product->name }}</div>
-        <div class="details">Yaroqlik muddate {{ $production->product->lifetime }} soat</div>
-        <div class="details"> {{ $production->created_at->format('H:i:s') }}</div>
+        <div class="details">Yaroqlik muddati {{ $production->product->lifetime }} soat</div>
+        <div class="details"> {{ $production->created_at }}</div>
         <div class="qrcode">
             {{-- Generate QR code --}}
             {!! QrCode::size(100)->generate('{{ $production->id }}') !!}

@@ -8,7 +8,9 @@ use Livewire\Component;
 
 class Index extends Component
 {
-    public $showModal = false;
+    public $addProductForm = false;
+    public $editProductForm = false;
+    public $deleteProductForm = false;
     public $data = [];
     public $company_id = '';
     public $newProductName = '';
@@ -25,6 +27,23 @@ class Index extends Component
     {
         $this->deleteProductId = $id;
     }
+
+    public function modalForm($name, $status)
+    {
+        switch ($name) {
+            case 'add':
+
+                $this->addProductForm = $status;
+                break;
+            case 'edit':
+                $this->editProductForm = $status;
+                break;
+            case 'delete':
+                $this->deleteProductForm = $status;
+                break;
+        }
+    }
+
     public function newProduct()
     {
         Product::create([
@@ -32,7 +51,8 @@ class Index extends Component
             'company_id' => $this->company_id,
             'lifetime' => $this->newProductLife
         ]);
-        $this->reset(['newProductName', 'newProductLife']);
+        $this->reset(['newProductName', 'newProductLife', 'addProductForm']);
+
         $this->updateData();
     }
     public function updateData()

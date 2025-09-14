@@ -18,8 +18,8 @@
                                     <ul class="nk-block-tools g-3">
 
                                         <li class="nk-block-tools-opt">
-                                            <button href="#" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#addProduct"><em class="icon ni ni-plus"></em>
+                                            <button class="btn btn-primary" wire:click="modalForm('add',true)"><em
+                                                    class="icon ni ni-plus"></em>
                                                 <span>Add Product</span>
                                             </button>
                                         </li>
@@ -82,8 +82,8 @@
                                                     </div>
                                                 </td>
                                                 <td class="nk-tb-col">
-                                                    <a wire:click="editProduct('{{ $prd->id }}')" href="#"
-                                                        data-toggle="modal" data-target="#editProduct"
+                                                    <a wire:click.prevent="editProduct('{{ $prd->id }}')"
+                                                        href="#" data-toggle="modal" data-target="#editProduct"
                                                         class="project-title">
                                                         <div class="product-info">
                                                             <h6 class="title">{{ $prd->name }}</h6>
@@ -204,64 +204,68 @@
         </div>
     </div>
     <!--modal -->
+    @if ($addProductForm)
+        <div class="modal fade show" id="addProduct" aria-modal="true" role="dialog"
+            style="display:block; padding-left:0px;">
 
-    <div class="modal fade " id="addProduct">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <a href="#" wire:click.prevent="modalForm('add',false)" class="close">
+                        <em class="icon ni ni-cross-sm"></em>
+                    </a>
+                    <div class="modal-body modal-body-md">
+                        <h5 class="modal-title">Yangi Maxsulot</h5>
 
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
-                    <em class="icon ni ni-cross-sm"></em>
-                </a>
-                <div class="modal-body modal-body-md">
-                    <h5 class="modal-title">Yangi Maxsulot</h5>
-
-                    <div class="row g-gs">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-label" for="name">Maxsulot nomi</label>
-                                <div class="form-control-wrap">
-                                    <input type="text" class="form-control" id="name"
-                                        wire:model="newProductName" required="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-label" for="code">Yaroqlik vaqti</label>
-                                <div class="form-control-wrap">
-                                    <input type="text" wire:model="newProductLife" class="form-control"
-                                        id="code" required="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-label" for="file">Maxsulot Rasmi</label>
-                                <div class="form-control-wrap">
-                                    <div class="custom-file">
-                                        <input type="file" multiple="" class="custom-file-input"
-                                            id="file" disabled>
-                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                        <div class="row g-gs">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label" for="name">Maxsulot nomi</label>
+                                    <div class="form-control-wrap">
+                                        <input type="text" class="form-control" id="name"
+                                            wire:model="newProductName" required="">
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label" for="code">Yaroqlik vaqti</label>
+                                    <div class="form-control-wrap">
+                                        <input type="text" wire:model="newProductLife" class="form-control"
+                                            id="code" required="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label" for="file">Maxsulot Rasmi</label>
+                                    <div class="form-control-wrap">
+                                        <div class="custom-file">
+                                            <input type="file" multiple="" class="custom-file-input"
+                                                id="file" disabled>
+                                            <label class="custom-file-label" for="customFile">Choose file</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
 
 
 
-                        <div class="col-12">
-                            <div class="form-group">
-                                <button data-dismiss="modal" wire:click="newProduct()" class="btn btn-primary">Add
-                                    Product</button>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <button data-dismiss="modal" wire:click="newProduct()"
+                                        class="btn btn-primary">Add
+                                        Product</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
+
     <div class="modal fade" id="editProduct">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -310,32 +314,35 @@
             </div>
         </div>
     </div><!-- .Edit Modal-Content -->
-    <div class="modal fade" id="deleteProduct">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross"></em></a>
-                <div class="modal-body modal-body-sm text-center">
-                    <div class="nk-modal py-4">
-                        <em class="nk-modal-icon icon icon-circle icon-circle-xxl ni ni-cross bg-danger"></em>
-                        <h4 class="nk-modal-title">Are You Sure ?</h4>
-                        <div class="nk-modal-text mt-n2">
-                            <p class="text-soft">This product will be removed permanently.</p>
+
+    @if ($deleteProductForm)
+        <div class="modal fade" id="deleteProduct" aria-modal="true" role="dialog"
+            style="display:block; padding-left:0px;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross"></em></a>
+                    <div class="modal-body modal-body-sm text-center">
+                        <div class="nk-modal py-4">
+                            <em class="nk-modal-icon icon icon-circle icon-circle-xxl ni ni-cross bg-danger"></em>
+                            <h4 class="nk-modal-title">Are You Sure ?</h4>
+                            <div class="nk-modal-text mt-n2">
+                                <p class="text-soft">This product will be removed permanently.</p>
+                            </div>
+                            <ul class="d-flex justify-content-center gx-4 mt-4">
+                                <li>
+                                    <button wire:click="deleteProduct" data-dismiss="modal" id="deletePD"
+                                        class="btn btn-success">Yes, Delete
+                                        it</button>
+                                </li>
+                                <li>
+                                    <button data-dismiss="modal" data-toggle="modal" data-target="#editEventPopup"
+                                        class="btn btn-danger btn-dim">Cancel</button>
+                                </li>
+                            </ul>
                         </div>
-                        <ul class="d-flex justify-content-center gx-4 mt-4">
-                            <li>
-                                <button wire:click="deleteProduct" data-dismiss="modal" id="deletePD"
-                                    class="btn btn-success">Yes, Delete
-                                    it</button>
-                            </li>
-                            <li>
-                                <button data-dismiss="modal" data-toggle="modal" data-target="#editEventPopup"
-                                    class="btn btn-danger btn-dim">Cancel</button>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
-        </div>
-    </div><!-- .Delete Modal-content -->
-
+        </div><!-- .Delete Modal-content -->
+    @endif
 </div>

@@ -9,4 +9,11 @@ class Production extends Model
 {
     use HasUuids;
     public $guarded = [];
+    protected $casts = [
+        'expires_at' => 'datetime',
+    ];
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

@@ -16,10 +16,10 @@
         <div class="grid grid-cols-8 grid-rows-6 gap-3 h-full">
             <!-- Пример кнопок -->
             @foreach ($data as $product)
-                <button
+                <a href="{{ route('kiosk.production', ['id' => $product->id]) }}" target="_blank"
                     class="bg-green-500 text-white rounded-xl flex items-center justify-center text-sm font-semibold hover:bg-blue-600 transition">
                     {{ $product->name }} / {{ $product->lifetime }} soat
-                </button>
+                </a>
             @endforeach
 
 

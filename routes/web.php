@@ -11,7 +11,9 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
 
-Route::resource('/', KioskControler::class);
+
+
+
 //return QrCode::size(200)->generate('Hello, Laravel QR Code!');
 
 
@@ -21,3 +23,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::resource('/production', ProductionController::class);
     Route::resource('/user', UserController::class);
 });
+
+Route::get('/', [KioskControler::class, 'index'])->name('kiosk.index');
+Route::get('/{id}', [KioskControler::class, 'show'])->name('kiosk.show');
+
+Route::get('/{id}/production', [KioskControler::class, 'production'])->name('kiosk.production');

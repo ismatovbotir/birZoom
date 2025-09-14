@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Production;
 use Illuminate\Http\Request;
 
 class KioskControler extends Controller
@@ -37,7 +38,8 @@ class KioskControler extends Controller
      */
     public function show(string $id)
     {
-        //
+        $production = Production::where('id', $id)->with('product')->first();
+        return view('label', compact('production'));
     }
 
     /**
@@ -62,5 +64,17 @@ class KioskControler extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function production($id)
+    {
+        $product = Product::where('id', $id)->first();
+        $production = Production::create(
+            [
+                'product_id' => $product->id,
+                'expires_at' => now()->addHours($product->lifetime)
+            ]
+        );
+        return to_route('kiosk.show', ['id' => $production->id]);
     }
 }

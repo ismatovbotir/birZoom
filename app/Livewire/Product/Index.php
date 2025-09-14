@@ -28,7 +28,7 @@ class Index extends Component
         $this->deleteProductId = $id;
     }
 
-    public function modalForm($name, $status)
+    public function modalForm($name, $status, $id = '')
     {
         switch ($name) {
             case 'add':
@@ -37,8 +37,16 @@ class Index extends Component
                 break;
             case 'edit':
                 $this->editProductForm = $status;
+                $currentProduct = Product::where('id', $id)->first();
+                if ($currentProduct) {
+                    $this->currentProductId = $id;
+                    $this->currentProductName = $currentProduct->name;
+                    $this->currentProductLife = $currentProduct->lifetime;
+                }
+
                 break;
             case 'delete':
+                $this->currentProductId = $id;
                 $this->deleteProductForm = $status;
                 break;
         }
@@ -61,17 +69,10 @@ class Index extends Component
         //dd($company);
         $this->company_id = $company->id;
         $this->data = Product::where('company_id', $company->id)->get();
+
         //dd($this->data);
     }
-    public function editProduct($id)
-    {
-        $currentProduct = Product::where('id', $id)->first();
-        if ($currentProduct) {
-            $this->currentProductId = $id;
-            $this->currentProductName = $currentProduct->name;
-            $this->currentProductLife = $currentProduct->lifetime;
-        }
-    }
+
     public function updateProduct()
     {
         Product::where('id', $this->currentProductId)->update(
@@ -80,13 +81,14 @@ class Index extends Component
                 'lifetime' => $this->currentProductLife
             ]
         );
-        $this->reset(['currentProductId', 'currentProductLife', 'currentProductName']);
+        $this->reset(['currentProductId', 'currentProductLife', 'currentProductName', 'editProductForm']);
         $this->updateData();
     }
     public function deleteProduct()
     {
-        Product::where('id', $this->deleteProductId)->delete();
-        $this->reset('deleteProductId');
+        Product::where('id', $this->currentProductId)->delete();
+        $this->reset('currentProductId');
+        $this->deleteProductForm = false;
         $this->updateData();
     }
     public function render()

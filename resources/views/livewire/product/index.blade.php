@@ -82,9 +82,8 @@
                                                     </div>
                                                 </td>
                                                 <td class="nk-tb-col">
-                                                    <a wire:click.prevent="editProduct('{{ $prd->id }}')"
-                                                        href="#" data-toggle="modal" data-target="#editProduct"
-                                                        class="project-title">
+                                                    <a wire:click.prevent="modalForm('edit',true,'{{ $prd->id }}')"
+                                                        href="#" class="project-title">
                                                         <div class="product-info">
                                                             <h6 class="title">{{ $prd->name }}</h6>
                                                         </div>
@@ -112,14 +111,12 @@
                                                                                 data-target="#viewProduct"><em
                                                                                     class="icon ni ni-eye"></em><span>View
                                                                                     Product</span></a></li> --}}
-                                                                        <li><a wire:click="editProduct('{{ $prd->id }}')"
-                                                                                href="#" data-toggle="modal"
-                                                                                data-target="#editProduct"><em
+                                                                        <li><a wire:click.prevent="modalForm('edit',true,'{{ $prd->id }}')"
+                                                                                href="#"><em
                                                                                     class="icon ni ni-edit"></em><span>Edit
                                                                                     Product</span></a></li>
-                                                                        <li><a href="#" data-toggle="modal"
-                                                                                wire:click="selectProduct('{{ $prd->id }}')"
-                                                                                data-target="#deleteProduct"><em
+                                                                        <li><a href="#"
+                                                                                wire:click.prevent="modalForm('delete',true,'{{ $prd->id }}')"><em
                                                                                     class="icon ni ni-delete"></em><span>Delete
                                                                                     Product</span></a></li>
                                                                     </ul>
@@ -265,58 +262,59 @@
             </div>
         </div>
     @endif
+    @if ($editProductForm)
+        <div class="modal fade show" id="editProduct" aria-modal="true" role="dialog"
+            style="display:block; padding-left:0px;">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <a href="#" class="close" wire:click.prevent="modalForm('edit',false)">
+                        <em class="icon ni ni-cross-sm"></em>
+                    </a>
+                    <div class="modal-body modal-body-md">
+                        <h5 class="modal-title">Edit Product</h5>
 
-    <div class="modal fade" id="editProduct">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <a href="#" class="close" data-dismiss="modal" aria-label="Close">
-                    <em class="icon ni ni-cross-sm"></em>
-                </a>
-                <div class="modal-body modal-body-md">
-                    <h5 class="modal-title">Edit Product</h5>
+
+                        <div class="row g-gs">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label" for="edit-name">Maxsulot nomi</label>
+                                    <div class="form-control-wrap">
+                                        <input wire:model="currentProductName" type="text" class="form-control"
+                                            id="edit-name" value="{{ $currentProductName }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label" for="edit-code">Maxsulot yaroqlik muddati</label>
+                                    <div class="form-control-wrap">
+                                        <input wire:model="currentProductLife" type="text" class="form-control"
+                                            id="edit-code" value="{{ $currentProductLife }}">
+                                    </div>
+                                </div>
+                            </div>
 
 
-                    <div class="row g-gs">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-label" for="edit-name">Maxsulot nomi</label>
-                                <div class="form-control-wrap">
-                                    <input wire:model="currentProductName" type="text" class="form-control"
-                                        id="edit-name" value="{{ $currentProductName }}">
+
+
+
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <button wire:click="updateProduct" data-dismiss="modal"
+                                        class="btn btn-primary">Update
+                                        Product</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-label" for="edit-code">Maxsulot yaroqlik muddati</label>
-                                <div class="form-control-wrap">
-                                    <input wire:model="currentProductLife" type="text" class="form-control"
-                                        id="edit-code" value="{{ $currentProductLife }}">
-                                </div>
-                            </div>
-                        </div>
 
 
-
-
-
-                        <div class="col-12">
-                            <div class="form-group">
-                                <button wire:click="updateProduct" data-dismiss="modal"
-                                    class="btn btn-primary">Update
-                                    Product</button>
-                            </div>
-                        </div>
                     </div>
-
-
                 </div>
             </div>
-        </div>
-    </div><!-- .Edit Modal-Content -->
-
+        </div><!-- .Edit Modal-Content -->
+    @endif
     @if ($deleteProductForm)
-        <div class="modal fade" id="deleteProduct" aria-modal="true" role="dialog"
+        <div class="modal fade show" id="deleteProduct" aria-modal="true" role="dialog"
             style="display:block; padding-left:0px;">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -330,12 +328,12 @@
                             </div>
                             <ul class="d-flex justify-content-center gx-4 mt-4">
                                 <li>
-                                    <button wire:click="deleteProduct" data-dismiss="modal" id="deletePD"
-                                        class="btn btn-success">Yes, Delete
+                                    <button wire:click="deleteProduct" id="deletePD" class="btn btn-success">Yes,
+                                        Delete
                                         it</button>
                                 </li>
                                 <li>
-                                    <button data-dismiss="modal" data-toggle="modal" data-target="#editEventPopup"
+                                    <button data-dismiss="modal" wire:click="modalForm('delete',false,'')"
                                         class="btn btn-danger btn-dim">Cancel</button>
                                 </li>
                             </ul>

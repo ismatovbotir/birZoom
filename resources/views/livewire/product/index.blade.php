@@ -214,51 +214,50 @@
                 </a>
                 <div class="modal-body modal-body-md">
                     <h5 class="modal-title">Yangi Maxsulot</h5>
-                    <form action="#" class="mt-2">
-                        <div class="row g-gs">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label" for="name">Maxsulot nomi</label>
-                                    <div class="form-control-wrap">
-                                        <input type="text" class="form-control" id="name"
-                                            wire:model="newProductName" required="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label" for="code">Yaroqlik vaqti</label>
-                                    <div class="form-control-wrap">
-                                        <input type="text" wire:model="newProductLife" class="form-control"
-                                            id="code" required="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label" for="file">Maxsulot Rasmi</label>
-                                    <div class="form-control-wrap">
-                                        <div class="custom-file">
-                                            <input type="file" multiple="" class="custom-file-input"
-                                                id="file" disabled>
-                                            <label class="custom-file-label" for="customFile">Choose file</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
-
-
-
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <button data-dismiss="modal" wire:click="newProduct()"
-                                        class="btn btn-primary">Add
-                                        Product</button>
+                    <div class="row g-gs">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label" for="name">Maxsulot nomi</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control" id="name"
+                                        wire:model="newProductName" required="">
                                 </div>
                             </div>
                         </div>
-                    </form>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label" for="code">Yaroqlik vaqti</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" wire:model="newProductLife" class="form-control"
+                                        id="code" required="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label" for="file">Maxsulot Rasmi</label>
+                                <div class="form-control-wrap">
+                                    <div class="custom-file">
+                                        <input type="file" multiple="" class="custom-file-input"
+                                            id="file" disabled>
+                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <button data-dismiss="modal" wire:click="newProduct()" class="btn btn-primary">Add
+                                    Product</button>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -272,40 +271,40 @@
                 <div class="modal-body modal-body-md">
                     <h5 class="modal-title">Edit Product</h5>
 
-                    <form action="#" class="mt-2">
-                        <div class="row g-gs">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label" for="edit-name">Maxsulot nomi</label>
-                                    <div class="form-control-wrap">
-                                        <input wire:model="currentProductName" type="text" class="form-control"
-                                            id="edit-name" value="{{ $currentProductName }}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label" for="edit-code">Maxsulot yaroqlik muddati</label>
-                                    <div class="form-control-wrap">
-                                        <input wire:model="currentProductLife" type="text" class="form-control"
-                                            id="edit-code" value="{{ $currentProductLife }}">
-                                    </div>
-                                </div>
-                            </div>
 
-
-
-
-
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <button wire:click="updateProduct" data-dismiss="modal" type="submit"
-                                        class="btn btn-primary">Update
-                                        Product</button>
+                    <div class="row g-gs">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label" for="edit-name">Maxsulot nomi</label>
+                                <div class="form-control-wrap">
+                                    <input wire:model="currentProductName" type="text" class="form-control"
+                                        id="edit-name" value="{{ $currentProductName }}">
                                 </div>
                             </div>
                         </div>
-                    </form>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label" for="edit-code">Maxsulot yaroqlik muddati</label>
+                                <div class="form-control-wrap">
+                                    <input wire:model="currentProductLife" type="text" class="form-control"
+                                        id="edit-code" value="{{ $currentProductLife }}">
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <button wire:click="updateProduct" data-dismiss="modal"
+                                    class="btn btn-primary">Update
+                                    Product</button>
+                            </div>
+                        </div>
+                    </div>
+
 
                 </div>
             </div>

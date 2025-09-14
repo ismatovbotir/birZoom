@@ -24,7 +24,14 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($data as $prd)
-                                            <tr class="nk-tb-item" wire:key="{{ $prd->id }}">
+                                            @php
+                                                $table_color = '';
+                                                if ($prd->expired_at < now()) {
+                                                    $table_color = 'table-danger';
+                                                }
+
+                                            @endphp
+                                            <tr class="nk-tb-item {{ $table_color }}" wire:key="{{ $prd->id }}">
 
                                                 <td class="nk-tb-col">
 
@@ -37,12 +44,12 @@
                                                     <span>{{ $prd->product->lifetime }}</span>
                                                 </td>
                                                 <td class="nk-tb-col tb-col-md">
-                                                    <span class="user-avatar md">
+                                                    <span>
                                                         {{ $prd->created_at }}
                                                     </span>
                                                 </td>
                                                 <td class="nk-tb-col tb-col-md">
-                                                    <span class="user-avatar md">
+                                                    <span>
                                                         {{ $prd->expires_at }}
                                                     </span>
                                                 </td>

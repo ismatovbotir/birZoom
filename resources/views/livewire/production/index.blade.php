@@ -26,7 +26,7 @@
                                         @foreach ($data as $prd)
                                             @php
                                                 $table_color = '';
-                                                if ($prd->expired_at < now()) {
+                                                if ($prd->expires_at < now()) {
                                                     $table_color = 'table-danger';
                                                 }
 
